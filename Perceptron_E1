@@ -1,0 +1,20 @@
+
+class Perceptron:
+
+    def __init__(self, weights, bias):
+        self.weights = weights  # a list
+        self.bias = bias
+
+    def fit(self, input_list):
+        if len(self.weights) == len(input_list):
+            output = self.bias
+            for i in range(len(self.weights)):
+                output = output + self.weights[i]*input_list[i]
+            if output >= 0:
+                return 1
+            else:
+                return 0
+        else:
+            print("Error, input length not equal to weight length")
+
+
