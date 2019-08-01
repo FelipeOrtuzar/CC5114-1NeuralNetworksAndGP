@@ -1,0 +1,95 @@
+from Perceptron import Perceptron
+
+
+def test_and():
+
+    AND = Perceptron([3, 4], -5)
+    assert(AND.fit([0, 0]) == 0)
+    assert(AND.fit([0, 1]) == 0)
+    assert(AND.fit([1, 0]) == 0)
+    assert(AND.fit([1, 1]) == 1)
+
+
+def test_or():
+
+    OR = Perceptron([5, 4], -3)
+    assert(OR.fit([0, 0]) == 0)
+    assert(OR.fit([0, 1]) == 1)
+    assert(OR.fit([1, 0]) == 1)
+    assert(OR.fit([1, 1]) == 1)
+
+
+def test_nand():
+
+    NAND = Perceptron([-2, -2], 3)
+    assert (NAND.fit([0, 0]) == 1)
+    assert (NAND.fit([0, 1]) == 1)
+    assert (NAND.fit([1, 0]) == 1)
+    assert (NAND.fit([1, 1]) == 0)
+
+
+def test_sum():
+    x1, x2 = 0, 0
+    NAND = Perceptron([-2, -2], 3)
+    a1 = NAND.fit([x1, x2])
+    b1 = NAND.fit([x1, a1])
+    b2 = NAND.fit([x2, a1])
+    c1 = NAND.fit([b1, b2])
+    assert c1 == 0
+
+    x1, x2 = 1, 0
+    NAND = Perceptron([-2, -2], 3)
+    a1 = NAND.fit([x1, x2])
+    b1 = NAND.fit([x1, a1])
+    b2 = NAND.fit([x2, a1])
+    c1 = NAND.fit([b1, b2])
+    assert c1 == 1
+
+    x1, x2 = 0, 1
+    NAND = Perceptron([-2, -2], 3)
+    a1 = NAND.fit([x1, x2])
+    b1 = NAND.fit([x1, a1])
+    b2 = NAND.fit([x2, a1])
+    c1 = NAND.fit([b1, b2])
+    assert c1 == 1
+
+    x1, x2 = 1, 1
+    NAND = Perceptron([-2, -2], 3)
+    a1 = NAND.fit([x1, x2])
+    b1 = NAND.fit([x1, a1])
+    b2 = NAND.fit([x2, a1])
+    c1 = NAND.fit([b1, b2])
+    assert c1 == 0
+
+    # ahora vemos el resto
+
+    x1, x2 = 0, 0
+    NAND = Perceptron([-2, -2], 3)
+    a1 = NAND.fit([x1, x2])
+    d1 = NAND.fit([a1, a1])
+    assert d1 == 0
+
+    x1, x2 = 1, 0
+    NAND = Perceptron([-2, -2], 3)
+    a1 = NAND.fit([x1, x2])
+    d1 = NAND.fit([a1, a1])
+    assert d1 == 0
+
+    x1, x2 = 0, 1
+    NAND = Perceptron([-2, -2], 3)
+    a1 = NAND.fit([x1, x2])
+    d1 = NAND.fit([a1, a1])
+    assert d1 == 0
+
+    x1, x2 = 1, 1
+    NAND = Perceptron([-2, -2], 3)
+    a1 = NAND.fit([x1, x2])
+    d1 = NAND.fit([a1, a1])
+    assert d1 == 1
+
+    # el resto, al menos con una suma de dos numeros, se comporta como un AND
+
+test_and()
+test_nand()
+test_or()
+test_sum()
